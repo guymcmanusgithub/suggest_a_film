@@ -65,18 +65,33 @@ end
 # p top_hundred_movies
 
 ### Generate randomly selected 5 or 10 movies for the user to rate
-user_votes = []
+movies_and_ratings = []
 puts "please rate the five movies below:"
 counter = 0
 while counter < 5
-  your_options = top_hundred_movies[rand(100)][2]
-  print "please rate #{your_options}: "
-  user_vote = gets.chomp.to_f
-  vote_title = "#{your_options}, #{user_vote}"
-  user_votes << vote_title
+  current_movie_to_rate = top_hundred_movies[rand(100)] # this generates random movies from the to_100 array
+  current_movie_title = current_movie_to_rate[2]
+  current_movie_id = current_movie_to_rate[0]
+  print "please rate #{current_movie_title} from 1 to 5: "
+  user_rating = gets.chomp.to_f
+  rating_hash = {
+    userid: "5000",
+    movie_id: current_movie_id,
+    movie_title: current_movie_title,
+    user_rating: user_rating
+  }
+  movies_and_ratings << rating_hash
+  # user_votes << vote_title
   counter += 1
 end
 
-print user_votes
+print movies_and_ratings
+puts
+movies_ids = []
+movies_and_ratings.each do |hash|
+  movie_ids << hash[:movie_id]
+end
+
+
 
 
