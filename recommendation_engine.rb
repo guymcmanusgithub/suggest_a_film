@@ -50,9 +50,9 @@ end
 
 ## the top hundred movies
 top_hundred_movies = sorted_most_rated_movies[1..100]
-# p top_hundred_movies[1]
 
-# compare movie ideas and 
+# match movie ids in movie_data with movie ids in top_100list
+# enter the title inside the top_100 array 
 
 movie_data.each do |item|
   top_hundred_movies.each do |movie|
@@ -62,12 +62,21 @@ movie_data.each do |item|
   end  
 end 
 
-p top_hundred_movies
-# movie_data.each do |item|
-#   item.each_with_index do |id, index|
-#     p id
-#   end 
-# end 
+# p top_hundred_movies
 
-# movie_title = top_hundred_movies[0] & movie_data[0]
-# print movie_title
+### Generate randomly selected 5 or 10 movies for the user to rate
+user_votes = []
+puts "please rate the five movies below:"
+counter = 0
+while counter < 5
+  your_options = top_hundred_movies[rand(100)][2]
+  print "please rate #{your_options}: "
+  user_vote = gets.chomp.to_f
+  vote_title = "#{your_options}, #{user_vote}"
+  user_votes << vote_title
+  counter += 1
+end
+
+print user_votes
+
+
