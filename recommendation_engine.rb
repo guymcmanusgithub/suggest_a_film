@@ -38,9 +38,36 @@ most_rated_movies = Hash.new(0)
 movies_rated_often.each do |movie|
   most_rated_movies[movie] += 1
 end
+sorted_most_rated_movies = most_rated_movies.sort_by{|k, v| v}.reverse
 
-most_rated_movies.each do |k, v|
+# print sorted_movies
+# p most_rated_movies
+
+sorted_most_rated_movies.each do |k, v|
   hashmovies = "movieID #{k} was rated #{v} times \n"
-  print hashmovies
+  # print hashmovies
 end
 
+## the top hundred movies
+top_hundred_movies = sorted_most_rated_movies[1..100]
+# p top_hundred_movies[1]
+
+# compare movie ideas and 
+
+movie_data.each do |item|
+  top_hundred_movies.each do |movie|
+    if item[0] == movie[0]
+      movie << item[1]
+    end 
+  end  
+end 
+
+p top_hundred_movies
+# movie_data.each do |item|
+#   item.each_with_index do |id, index|
+#     p id
+#   end 
+# end 
+
+# movie_title = top_hundred_movies[0] & movie_data[0]
+# print movie_title
