@@ -69,9 +69,12 @@ end
 
 ## Generate randomly selected 5 or 10 movies for the user to rate
 movies_and_ratings = []
-puts "please rate the five movies below:"
+puts "How many movies would you like to review? \n(keeping in mind that the more you review the more accurate our recommendations)"
+number_of_movies_to_rate = gets.chomp.to_i
+puts "please rate the #{number_of_movies_to_rate} movies below:"
+
 counter = 0
-while counter < 5
+while counter < number_of_movies_to_rate
   current_movie_to_rate = top_hundred_movies[rand(100)] # this generates random movies from the to_100 array
   current_movie_title = current_movie_to_rate[2]
   current_movie_id = current_movie_to_rate[0]
@@ -160,7 +163,7 @@ recommended_movies.each do |movie_id|
   end
 end
 puts
-spinner.stop("We recommend these movies to you: \n")
+spinner.stop("\nWe recommend these movies to you: \n")
 puts recommended_list
 
 # movie_data.each do |item|
