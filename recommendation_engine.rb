@@ -168,14 +168,7 @@ recommended_movies.each do |movie_id|
     end
   end
 end
-# puts
+
 spinner.stop("\nWe recommend these movies to you: \n")
 puts recommended_list
 
-# movie_data.each do |item|
-#   top_hundred_movies.each do |movie|
-#     if item[0] == movie[0]
-#       movie << item[1]
-#     end 
-#   end  
-# end 
