@@ -64,37 +64,37 @@ end
 
 # p top_hundred_movies
 
-# Generate randomly selected 5 or 10 movies for the user to rate
-# movies_and_ratings = []
-# puts "please rate the five movies below:"
-# counter = 0
-# while counter < 5
-#   current_movie_to_rate = top_hundred_movies[rand(100)] # this generates random movies from the to_100 array
-#   current_movie_title = current_movie_to_rate[2]
-#   current_movie_id = current_movie_to_rate[0]
-#   print "please rate #{current_movie_title} from 1 to 5: "
-#   current_user_rating = gets.chomp.to_f
-#   rating_hash = {
-#     user_id: "5000",
-#     movie_id: current_movie_id,
-#     movie_title: current_movie_title,
-#     user_rating: current_user_rating
-#   }
-#   movies_and_ratings << rating_hash
-#   # user_votes << vote_title
-#   counter += 1
-# end
-# puts
+## Generate randomly selected 5 or 10 movies for the user to rate
+movies_and_ratings = []
+puts "please rate the five movies below:"
+counter = 0
+while counter < 10
+  current_movie_to_rate = top_hundred_movies[rand(100)] # this generates random movies from the to_100 array
+  current_movie_title = current_movie_to_rate[2]
+  current_movie_id = current_movie_to_rate[0]
+  print "please rate #{current_movie_title} from 1 to 5: "
+  current_user_rating = gets.chomp.to_f
+  rating_hash = {
+    user_id: "5000",
+    movie_id: current_movie_id,
+    movie_title: current_movie_title,
+    user_rating: current_user_rating
+  }
+  movies_and_ratings << rating_hash
+  counter += 1
+end
+puts
 # print movies_and_ratings
-# puts
-# movies_ids = []
-# movies_ratings = []
-# movies_and_ratings.each do |hash|
-#   movies_ids << hash[:movie_id]
-#   movies_ratings << hash[:user_rating]
-# end
-
-
+puts
+movies_ids = []
+movies_ratings = []
+movies_and_ratings.each do |hash|
+  movies_ids << hash[:movie_id]
+  movies_ratings << hash[:user_rating]
+end
+user_5000_hash = movies_ids.zip(movies_ratings).to_h
+user_5000_hash_for_pearsons = {rating_hash[:user_id] => user_5000_hash}
+# p user_5000_hash_for_pearsons
 # print movies_ids
 # puts
 # print movies_ratings
@@ -119,7 +119,7 @@ end
 ### that is outside of the method without passing it in the argument
 ### in this case it is the variable "user_data"
 counter = 1
-array_of_each_user = []
+array_of_each_user = [] ## used the method in a loop to create hashes for all the users in the ratings.csv file
 while counter <= number_of_users_in_db # usernumber in the dataset is 671
   user = create_hash_of_movieid_and_ratings_for_each_user(user_data, "#{counter}")
   array_of_each_user << user
@@ -134,14 +134,14 @@ end
 ##
 # p array_of_each_user
 # p array_of_id_of_user
-scores_from_users = array_of_id_of_user.zip(array_of_each_user).to_h
+scores_users = array_of_id_of_user.zip(array_of_each_user).to_h
+combined_hash = scores_users.merge(user_5000_hash_for_pearsons)
+# p combined_hash
 
-p scores_from_users
-# array_of_user_1_to_4 = ["1", "2", "3", "4"]
-# array_of_hashes_user_1_to_4 = [user_1, user_2, user_3, user_4]
-# scores_user_1_to_4 = array_of_user_1_to_4.zip(array_of_hashes_user_1_to_4).to_h
-# # p scores_user_1_to_4
+# # p scores_users
 
+# p Pearson.coefficient(combined_hash, '5000', '4')
+# puts
+# p Pearson.closest_entities(combined_hash, '5000', limit: 5) 
 
-# p Pearson.coefficient(scores_user_1_to_4, '1', '4')
-# p Pearson.closest_entities(scores_user_1_to_4, "1", limit: 1) 
+p Pearson.recommendations(combined_hash, '5000')
