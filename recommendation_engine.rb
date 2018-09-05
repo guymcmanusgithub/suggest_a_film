@@ -1,6 +1,8 @@
 require  'csv'
 require 'pearson'
 require 'tty-spinner'
+require 'colorize'
+spinner = TTY::Spinner.new("[:spinner] Loading your recommendations...", format: :pulse_2)
 # spinner = TTY::Spinner.new("wait :spinner ...", format: :spin_2)
 # loading all the required files from csv files
 movie_names = CSV.read("/Users/athoi/apps/ruby/excercises/suggest_a_film/movies.csv")
@@ -69,11 +71,11 @@ end
 movies_and_ratings = []
 puts "please rate the five movies below:"
 counter = 0
-while counter < 3
+while counter < 5
   current_movie_to_rate = top_hundred_movies[rand(100)] # this generates random movies from the to_100 array
   current_movie_title = current_movie_to_rate[2]
   current_movie_id = current_movie_to_rate[0]
-  print "please rate #{current_movie_title} from 1 to 5: "
+  print "please rate #{current_movie_title.blue} from 1 to 5: "
   current_user_rating = gets.chomp.to_f
   rating_hash = {
     user_id: "5000",
@@ -85,7 +87,6 @@ while counter < 3
   counter += 1
 end
 
-spinner = TTY::Spinner.new("[:spinner] Loading your recommendations...", format: :pulse_2)
 spinner.auto_spin
 
 puts
@@ -154,7 +155,7 @@ recommended_list = []
 recommended_movies.each do |movie_id|
   movie_data.each do |movie|
     if movie_id[0] == movie[0]
-      recommended_list << movie[1]
+      recommended_list << movie[1].green
     end
   end
 end
