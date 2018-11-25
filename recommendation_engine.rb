@@ -7,8 +7,8 @@ spinner = TTY::Spinner.new("[:spinner] Loading your recommendations...", format:
 # spinner = TTY::Spinner.new("wait :spinner ...", format: :spin_2)
 
 ##########  LOADING THE CSV FILES FROM MOVIELENS #########
-movie_names = CSV.read("/Users/athoi/apps/ruby/excercises/suggest_a_film/movies.csv")
-all_user_rating = CSV.read("/Users/athoi/apps/ruby/excercises/suggest_a_film/ratings.csv")
+movie_names = CSV.read("./movies.csv")
+all_user_rating = CSV.read("./ratings.csv")
 
 #The number of individual users within the dataset.  Will be used to iterate over the data.
 number_of_users_in_db = 671
